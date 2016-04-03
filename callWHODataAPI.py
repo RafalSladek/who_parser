@@ -1,7 +1,13 @@
-import urllib.request, json
+import urllib.request
 
-response = urllib.request.urlopen("http://apps.who.int/gho/athena/api/?format=json").read().decode('utf8')
-print(response)
-obj = json.loads(response)
-print(obj)
-json.dump(obj, open('dimensions.json', 'w'))
+
+class WHODataAPI:
+    def __init__(self):
+        self.baseUrl = "http://apps.who.int/gho/athena/api/"
+        self.format = "foramt=json"
+        self.encoding = "utf8"
+
+    def get_who_dimensions(self):
+        return urllib.request.urlopen(self.baseUrl + "?" + self.format).read().decode(self.encoding)
+
+
